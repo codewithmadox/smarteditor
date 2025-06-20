@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
-import { SmartEditor } from './SmartEditor'
+import React, { useState, useRef } from 'react'
+import { SmartEditor, type SmartEditorRef } from './SmartEditor'
 
 export const Demo: React.FC = () => {
     const [content, setContent] = useState('<p>Hello, SmartEditor! Start typing here...</p>')
     const [readOnly, setReadOnly] = useState(false)
+    const [showStats, setShowStats] = useState(true)
+    const [autoSaveEnabled, setAutoSaveEnabled] = useState(false)
+    const editorRef = useRef<SmartEditorRef>(null)
 
     const handleChange = (html: string) => {
         setContent(html)
@@ -22,6 +25,32 @@ export const Demo: React.FC = () => {
         return url
     }
 
+    // Auto-save handler
+    const handleAutoSave = (html: string) => {
+        console.log('Auto-saving content:', html.substring(0, 100) + '...')
+        // In a real app, you would save to your backend here
+    }
+
+    // Imperative handle examples
+    const handleFocus = () => {
+        editorRef.current?.focus()
+    }
+
+    const handleClear = () => {
+        editorRef.current?.clear()
+    }
+
+    const handleGetStats = () => {
+        const stats = editorRef.current?.getStats()
+        if (stats) {
+            alert(`Characters: ${stats.characters}\nWords: ${stats.words}\nLines: ${stats.lines}`)
+        }
+    }
+
+    const handleInsertSample = () => {
+        editorRef.current?.insertContent('<h2>Sample Content</h2><p>This was inserted programmatically!</p>')
+    }
+
     return (
         <div className="p-8 max-w-6xl mx-auto">
             <h1 className="text-3xl font-bold mb-6">SmartEditor Demo</h1>
@@ -29,16 +58,62 @@ export const Demo: React.FC = () => {
             {/* Controls */}
             <div className="mb-6 p-4 bg-gray-100 rounded-lg">
                 <h2 className="text-xl font-semibold mb-3">Controls</h2>
-                <div className="flex gap-4 items-center">
-                    <label className="flex items-center gap-2">
-                        <input
-                            type="checkbox"
-                            checked={readOnly}
-                            onChange={(e) => setReadOnly(e.target.checked)}
-                            className="rounded"
-                        />
-                        <span>Read-only mode</span>
-                    </label>
+                <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                checked={readOnly}
+                                onChange={(e) => setReadOnly(e.target.checked)}
+                                className="rounded"
+                            />
+                            <span>Read-only mode</span>
+                        </label>
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                checked={showStats}
+                                onChange={(e) => setShowStats(e.target.checked)}
+                                className="rounded"
+                            />
+                            <span>Show statistics</span>
+                        </label>
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                checked={autoSaveEnabled}
+                                onChange={(e) => setAutoSaveEnabled(e.target.checked)}
+                                className="rounded"
+                            />
+                            <span>Auto-save (30s interval)</span>
+                        </label>
+                    </div>
+                    <div className="space-y-2">
+                        <button
+                            onClick={handleFocus}
+                            className="px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
+                        >
+                            Focus Editor
+                        </button>
+                        <button
+                            onClick={handleClear}
+                            className="px-3 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600 ml-2"
+                        >
+                            Clear Content
+                        </button>
+                        <button
+                            onClick={handleGetStats}
+                            className="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600 ml-2"
+                        >
+                            Get Stats
+                        </button>
+                        <button
+                            onClick={handleInsertSample}
+                            className="px-3 py-1 bg-purple-500 text-white rounded text-sm hover:bg-purple-600 ml-2"
+                        >
+                            Insert Sample
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -46,11 +121,45 @@ export const Demo: React.FC = () => {
             <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-2">Rich Text Editor</h2>
                 <SmartEditor
+                    ref={editorRef}
                     content={content}
                     onChange={handleChange}
                     placeholder="Start writing your content here..."
                     readOnly={readOnly}
                     onImageUpload={handleImageUpload}
+                    autoSave={autoSaveEnabled}
+                    onAutoSave={handleAutoSave}
+                    showStats={showStats}
+                    className="max-w-4xl"
+                />
+            </div>
+
+            {/* Table Example */}
+            <div className="mb-8">
+                <h2 className="text-xl font-semibold mb-2">Table Example</h2>
+                <SmartEditor
+                    content={`
+                        <h1>Sample Table</h1>
+                        <p>Click the 📊 button to insert a table, then use the table controls to modify it:</p>
+                        <table class="border-collapse border border-gray-300 w-full">
+                            <tr class="border-b border-gray-300">
+                                <th class="border border-gray-300 px-3 py-2 bg-gray-100 font-semibold">Name</th>
+                                <th class="border border-gray-300 px-3 py-2 bg-gray-100 font-semibold">Age</th>
+                                <th class="border border-gray-300 px-3 py-2 bg-gray-100 font-semibold">City</th>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="border border-gray-300 px-3 py-2">John Doe</td>
+                                <td class="border border-gray-300 px-3 py-2">30</td>
+                                <td class="border border-gray-300 px-3 py-2">New York</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="border border-gray-300 px-3 py-2">Jane Smith</td>
+                                <td class="border border-gray-300 px-3 py-2">25</td>
+                                <td class="border border-gray-300 px-3 py-2">Los Angeles</td>
+                            </tr>
+                        </table>
+                    `}
+                    readOnly={true}
                     className="max-w-4xl"
                 />
             </div>
@@ -66,6 +175,9 @@ export const Demo: React.FC = () => {
                             <li><a href="https://tiptap.dev" target="_blank">Links to external websites</a></li>
                             <li>Image uploads and drag & drop</li>
                             <li>All common text formatting</li>
+                            <li>Tables with full editing capabilities</li>
+                            <li>Auto-save functionality</li>
+                            <li>Character and word counting</li>
                         </ul>
                         <p>Try adding your own links and images using the toolbar!</p>
                         <blockquote>
@@ -108,7 +220,7 @@ export const Demo: React.FC = () => {
             {/* Features */}
             <div className="mb-6">
                 <h2 className="text-xl font-semibold mb-2">Features</h2>
-                <div className="grid md:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-4 gap-6">
                     <div>
                         <h3 className="font-semibold mb-2">Text Formatting</h3>
                         <ul className="list-disc list-inside space-y-1 text-gray-700 text-sm">

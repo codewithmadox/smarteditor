@@ -20,6 +20,18 @@ importers:
       '@tiptap/extension-strike':
         specifier: ^2.14.1
         version: 2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))
+      '@tiptap/extension-table':
+        specifier: ^2.14.1
+        version: 2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))(@tiptap/pm@2.14.1)
+      '@tiptap/extension-table-cell':
+        specifier: ^2.14.1
+        version: 2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))
+      '@tiptap/extension-table-header':
+        specifier: ^2.14.1
+        version: 2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))
+      '@tiptap/extension-table-row':
+        specifier: ^2.14.1
+        version: 2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))
       '@tiptap/extension-underline':
         specifier: ^2.14.1
         version: 2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))
@@ -29,6 +41,9 @@ importers:
       '@tiptap/starter-kit':
         specifier: ^2.4.0
         version: 2.14.1
+      lucide-react:
+        specifier: ^0.518.0
+        version: 0.518.0(react@18.3.1)
     devDependencies:
       '@types/react':
         specifier: ^18.2.0
@@ -618,6 +633,27 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
+  '@tiptap/extension-table-cell@2.14.1':
+    resolution: {integrity: sha512-7KhzD37IJRiBvx4CfOGiPmFkFNeHi4u7pgsymId2AJ7ebokFl7KnnD4MzZlJYNZm0+IgELsZILb35rpKqII7pQ==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-table-header@2.14.1':
+    resolution: {integrity: sha512-Aa3TzbclQ+V00UrgWhQI5wlYFfGCruIJzV3V0V2ujAFMNswF+GP8E2Yjyhj8lcCRTunV5ucDpVDbw8gYFQWtXA==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-table-row@2.14.1':
+    resolution: {integrity: sha512-zhnLu3hKpzafpjk8uxx8qlHKAnTx89fRO+3n1hWfVH5Dzh9rCsUE3OX/peCHLCg3HGn0OQPMqkKe3IKF/JB3FA==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-table@2.14.1':
+    resolution: {integrity: sha512-CMwcO5ChLRPKZLG5RHKHoFFy3C4gB5gKePnfAvdrjZ47LoYECvb0iy5CTFdgQCkaHokwFNfjW6pKOHFymjbuhQ==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+      '@tiptap/pm': ^2.7.0
+
   '@tiptap/extension-text-style@2.14.1':
     resolution: {integrity: sha512-pX9RK+VYVU4kQ8OHHuj3jA3z/rJEx70O0Iu7o1hFrBqCvcTWJua4N3gsEgV2uJyrtVDJyGpmUcsHpRqcWpDe1A==}
     peerDependencies:
@@ -1091,6 +1127,11 @@ packages:
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
+
+  lucide-react@0.518.0:
+    resolution: {integrity: sha512-kFg34uQqnVl/7HwAiigxPSpj//43VIVHQbMygQPtS1yT4btMXHCWUipHcgcXHD2pm1Z2nUBA/M+Vnh/YmWXQUw==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -2054,6 +2095,23 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.14.1(@tiptap/pm@2.14.1)
 
+  '@tiptap/extension-table-cell@2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))':
+    dependencies:
+      '@tiptap/core': 2.14.1(@tiptap/pm@2.14.1)
+
+  '@tiptap/extension-table-header@2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))':
+    dependencies:
+      '@tiptap/core': 2.14.1(@tiptap/pm@2.14.1)
+
+  '@tiptap/extension-table-row@2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))':
+    dependencies:
+      '@tiptap/core': 2.14.1(@tiptap/pm@2.14.1)
+
+  '@tiptap/extension-table@2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))(@tiptap/pm@2.14.1)':
+    dependencies:
+      '@tiptap/core': 2.14.1(@tiptap/pm@2.14.1)
+      '@tiptap/pm': 2.14.1
+
   '@tiptap/extension-text-style@2.14.1(@tiptap/core@2.14.1(@tiptap/pm@2.14.1))':
     dependencies:
       '@tiptap/core': 2.14.1(@tiptap/pm@2.14.1)
@@ -2564,6 +2622,10 @@ snapshots:
   lru-cache@6.0.0:
     dependencies:
       yallist: 4.0.0
+
+  lucide-react@0.518.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   magic-string@0.30.17:
     dependencies:
