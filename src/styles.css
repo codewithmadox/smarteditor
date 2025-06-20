@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for SmartEditor */
+.smarteditor {
+    @apply font-sans;
+}
+
+.smarteditor-toolbar {
+    @apply flex items-center gap-2 p-2 bg-gray-50 border-b border-gray-200;
+}
+
+.smarteditor-content {
+    @apply min-h-[200px] p-4;
+}
+
+/* ProseMirror specific styles */
+.ProseMirror {
+    @apply outline-none;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+    @apply text-gray-400 float-left h-0 pointer-events-none;
+    content: attr(data-placeholder);
+}
+
+.ProseMirror h1 {
+    @apply text-2xl font-bold my-4;
+}
+
+.ProseMirror h2 {
+    @apply text-xl font-bold my-3;
+}
+
+.ProseMirror h3 {
+    @apply text-lg font-bold my-2;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+    @apply pl-6 my-2;
+}
+
+.ProseMirror blockquote {
+    @apply border-l-4 border-gray-300 pl-4 my-4 text-gray-600;
+}
+
+.ProseMirror code {
+    @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+}
+
+.ProseMirror pre {
+    @apply bg-gray-100 p-4 rounded-lg overflow-x-auto my-4;
+}
+
+.ProseMirror pre code {
+    @apply bg-transparent p-0;
+}
